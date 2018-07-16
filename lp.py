@@ -19,5 +19,11 @@ G = nx.Graph()
 G.add_nodes_from((v, {'pos': p}) for v, p in points.items())
 for triangle in space.Delaunay(list(points.values())).simplices:
     G.add_weighted_edges_from(triangle_edges(triangle))
-nx.draw_networkx(G, pos=points)
+mst = set(nx.minimum_spanning_tree(G).edges)
+edgelist = list(G.edges)
+edge_color = [('red' if edge in mst else 'black') for edge in edgelist]
+nx.draw_networkx(
+    G, pos=points, edgelist=edgelist,
+    node_color='white', edge_color=edge_color
+)
 plt.show()
