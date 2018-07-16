@@ -35,12 +35,12 @@ for triangle in space.Delaunay(list(points.values())).simplices:
 edgelist = list(G.edges)
 mst = nx.minimum_spanning_tree(G)
 spt = shortest_path_tree(G, 0)
-mst_edges, spt_edges = (set(map(frozenset, T.edges)) for T in [mst, spt])
 print('MST weight:', mst.size(weight='weight'))
 print('SPT weight:', spt.size(weight='weight'))
 print()
 print('MST paths:', sum(nx.single_source_dijkstra_path_length(mst, 0).values()))
 print('SPT paths:', sum(nx.single_source_dijkstra_path_length(spt, 0).values()))
+mst_edges, spt_edges = (set(map(frozenset, T.edges)) for T in [mst, spt])
 edge_color = [color(frozenset(edge), mst_edges, spt_edges) for edge in edgelist]
 nx.draw_networkx(
     G, pos=points, edgelist=edgelist,
