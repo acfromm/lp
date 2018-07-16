@@ -32,14 +32,17 @@ G = nx.Graph()
 G.add_nodes_from((v, {'pos': p}) for v, p in points.items())
 for triangle in space.Delaunay(list(points.values())).simplices:
     G.add_weighted_edges_from(triangle_edges(triangle))
-edgelist = list(G.edges)
+
 mst = nx.minimum_spanning_tree(G)
 spt = shortest_path_tree(G, 0)
+
 print('MST weight:', mst.size(weight='weight'))
 print('SPT weight:', spt.size(weight='weight'))
 print()
 print('MST paths:', sum(nx.single_source_dijkstra_path_length(mst, 0).values()))
 print('SPT paths:', sum(nx.single_source_dijkstra_path_length(spt, 0).values()))
+
+edgelist = list(G.edges)
 mst_edges, spt_edges = (set(map(frozenset, T.edges)) for T in [mst, spt])
 edge_color = [color(frozenset(edge), mst_edges, spt_edges) for edge in edgelist]
 nx.draw_networkx(
