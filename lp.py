@@ -4,7 +4,7 @@ import networkx as nx
 import random as rand
 import scipy.spatial as space
 
-points = {i: (rand.uniform(-1, 1), rand.uniform(0, 1)) for i in range(10)}
+points = {i: (rand.uniform(0, 1), rand.uniform(0, 1)) for i in range(20)}
 
 def weighted_edge(u, v):
     x1, y1 = points[u]
