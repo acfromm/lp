@@ -26,4 +26,5 @@ nx.draw_networkx(
     G, pos=points, edgelist=edgelist,
     node_color='white', edge_color=edge_color
 )
+plt.axis('equal')
 plt.show()
