@@ -32,7 +32,7 @@ def lp_spt(G, source):
     m.setParam('OutputFlag', False)
     x = {}
     for i, j in H.edges:
-        x[i, j] = m.addVar(name='x[%s,%s]' % (i, j))
+        x[i, j] = m.addVar()
     m.setObjective(sum(H.edges[i, j]['weight'] * x[i, j] for i, j in H.edges))
     for i in H.nodes:
         inflow = sum(x[j, i] for j, _ in H.in_edges(i))
