@@ -38,7 +38,7 @@ def lp_spt(G, source):
         inflow = sum(x[j, i] for j, _ in H.in_edges(i))
         outflow = sum(x[i, j] for _, j in H.out_edges(i))
         rhs = 1 - len(H) if i == source else 1
-        m.addConstr(inflow - outflow == rhs, str(i))
+        m.addConstr(inflow - outflow == rhs)
     m.optimize()
     edges = (weighted_edge(u, v) for (u, v), var in x.items() if var.x > 0)
     T = nx.Graph()
